@@ -18,6 +18,8 @@ define([
       var layoutInfo = dom.makeLayoutInfo(event.currentTarget || event.target);
       var $editable = layoutInfo.editable();
 
+      console.log(clipboardData);
+      
       if (!clipboardData || !clipboardData.items || !clipboardData.items.length) {
         var callbacks = $editable.data('callbacks');
         // only can run if it has onImageUpload method
@@ -42,12 +44,21 @@ define([
             handler.invoke('editor.restoreRange', $editable);
 
             try {
+              
+              var frag = document.createDocumentFragment();
+              
               // insert normal dom code
               $(html).each(function () {
-                $editable.focus();
-                handler.invoke('editor.insertNode', $editable, this);
+                frag.appendChild(this);
               });
+              
+              console.log(frag);
+
+              $editable.focus();
+              handler.invoke('editor.insertNode', $editable, frag);
+
             } catch (ex) {
+              console.log(ex);
               // insert text
               $editable.focus();
               handler.invoke('editor.insertText', $editable, html);

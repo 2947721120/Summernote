@@ -408,6 +408,7 @@ define([
       beforeCommand($editable);
       var rng = this.createRange($editable);
       rng.insertNode(node);
+
       range.createFromNode(node).collapse().select();
       afterCommand($editable);
     };
