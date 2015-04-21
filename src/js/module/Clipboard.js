@@ -42,25 +42,12 @@ define([
 
             handler.invoke('editor.restoreNode', $editable);
             handler.invoke('editor.restoreRange', $editable);
-
+            
+            $editable.focus();
+            
             try {
-              
-              var frag = document.createDocumentFragment();
-              
-              // insert normal dom code
-              $(html).each(function () {
-                frag.appendChild(this);
-              });
-              
-              console.log(frag);
-
-              $editable.focus();
-              handler.invoke('editor.insertNode', $editable, frag);
-
+              handler.invoke('editor.insertHTML', $editable, html);
             } catch (ex) {
-              console.log(ex);
-              // insert text
-              $editable.focus();
               handler.invoke('editor.insertText', $editable, html);
             }
             return;

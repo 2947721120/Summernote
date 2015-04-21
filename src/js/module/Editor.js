@@ -414,6 +414,31 @@ define([
     };
 
     /**
+     * @method insertHTML
+     * insert html
+     * @param {Node} $editable
+     * @param {String} html
+     */
+    this.insertHTML = function ($editable, html) {
+      beforeCommand($editable);
+      var rng = this.createRange($editable);
+
+      var frag = document.createDocumentFragment();
+      var div = document.createElement('div');
+      div.innerHTML = html;
+      
+      var lastNode, el;
+      while ((el = div.firstChild)) {
+        lastNode = frag.appendChild(el);
+      }
+
+      rng.insertNode(frag);
+
+      range.createFromNode(lastNode).collapse().select();
+      afterCommand($editable);
+    };
+    
+    /**
      * insert text
      * @param {Node} $editable
      * @param {String} text
