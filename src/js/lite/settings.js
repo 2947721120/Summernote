@@ -13,6 +13,22 @@ define([
         'toolbar': Toolbar
       },
 
+
+      // toolbar
+      toolbar: [
+        //['style', ['style']],
+        ['font', ['bold', 'italic', 'underline', 'clear']]
+        //['fontname', ['fontname']],
+        //['fontsize', ['fontsize']],
+        //['color', ['color']],
+        //['para', ['ul', 'ol', 'paragraph']],
+        //['height', ['height']],
+        //['table', ['table']],
+        //['insert', ['link', 'picture', 'video', 'hr', 'specialchar']],
+        //['view', ['fullscreen', 'codeview']],
+        //['help', ['help']]
+      ],
+
       buttons: {},
 
       width: null,

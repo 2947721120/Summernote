@@ -1,0 +1,24 @@
+.note-btn-group {
+  position: relative;
+  display: inline-block;
+  margin-right: 8px;
+
+  > .note-btn-group {
+    margin-right:0px;
+  }
+
+  > .note-btn,
+  > .note-btn-group {
+    margin-left: -4px;
+
+    &:first-child {
+      margin-left: 0px;
+    }
+  }
+
+  &.open {
+    > .note-dropdown {
+      display:block;
+    }
+  }
+}

@@ -71,9 +71,10 @@ module.exports = function (grunt) {
     // recess: minify stylesheets
     recess: {
       dist: {
-        options: { compile: true, compress: true },
+        options: { compile: true, compress: true, verbose : true },
         files: {
-          'dist/summernote.css': ['src/less/summernote.less']
+          'dist/summernote.css': ['src/less/summernote.less'],
+          'dist/summernote-lite.css': ['src/less/summernote-lite.less']
         }
       }
     },
@@ -114,7 +115,7 @@ module.exports = function (grunt) {
     // watch source code change
     watch: {
       all: {
-        files: ['src/less/*.less', 'src/js/**/*.js'],
+        files: ['src/less/*.less', 'src/less/**/*.less', 'src/js/**/*.js'],
         tasks: ['recess', 'jshint', 'qunit'],
         options: {
           livereload: true

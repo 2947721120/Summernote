@@ -11,7 +11,10 @@ define(function () {
         }),
         ui.button({
           contents: 'italic',
-          click: context.createInvokeHandler('editor.italic')
+          click: context.createInvokeHandler('editor.italic'),
+          callback : function ($button) {
+            $button.addClass('active');
+          }
         })
       ]).render().appendTo($toolbar);
     };
