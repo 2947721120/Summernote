@@ -7,7 +7,14 @@
   overflow:hidden;
   z-index: @zindex-modal;
   .opacity(1);
+  display:none;
+
+  &.open {
+    display:block;
+  }
 }
+
+
 
 
 .note-modal-content {
@@ -64,6 +71,11 @@
   z-index: @zindex-modal-background;
   background: @modal-backdrop-bg;
   .opacity(0.5);
+  display:none;
+
+  &.open {
+    display:block;
+  }
 }
 
 
