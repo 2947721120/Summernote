@@ -5,69 +5,125 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" />
   <link rel="stylesheet" href="../dist/summernote-lite.css">
   <title>summernote-lite</title>
+  <style type="text/css">
+    .virtual-toolbar {
+      padding: 5px;
+      background: black;
+    }
+  </style>
 </head>
 <body>
   <h4>Summernote standalone</h4>
-  <div class="summernote">
 
+  <div>
+    <h2>Button</h2>
+
+    <div class="virtual-toolbar">
+      <button class="note-btn">Default Button</button>
+      <button class="note-btn focus">Focued Button</button>
+      <button class="note-btn active">Activated Button</button>
+      <button class="note-btn disabled">Disabled Button</button>
+
+    </div>
   </div>
 
-  <div class="note-editor">
-    <div class="note-toolbar">
-      <div class="note-btn-group">
-        <div class="note-btn-group open">
-          <button class="note-btn active">magic</button>
-          <div class="note-dropdown">
-            <div class="note-dropdown-menu">
-              <div class="note-dropdown-menu-item"> Normal</div>
-              <div class="note-dropdown-menu-item"> Normal</div>
-              <div class="note-dropdown-menu-item"> Normal</div>
-              <div class="note-dropdown-menu-item"> Normal</div>
-              <div class="note-dropdown-menu-item"> Normal</div>
-              <div class="note-dropdown-menu-item" style="font-size:32px;"> Header 1</div>
-            </div>
-          </div>
-        </div>
-        <button class="note-btn">italic</button>
-        <button class="note-btn active">bold</button>
-        <button class="note-btn active">underline</button>
-        <button class="note-btn active">removeStyle</button>
-      </div>
+  <div>
+    <h2>Button Group</h2>
 
+    <div class="virtual-toolbar">
       <div class="note-btn-group">
-        <button class="note-btn active">order</button>
-        <button class="note-btn active">unorder</button>
-        <div class="note-btn-group open">
-          <button class="note-btn active">align</button>
-          <div class="note-dropdown">
-            <div class="note-dropdown-menu">
-              <div class="note-btn-group">
-                <button class="note-btn ">order</button>
-                <button class="note-btn active">unorder</button>
-              </div>
-              <div class="note-btn-group">
-                <button class="note-btn ">order</button>
-                <button class="note-btn ">unorder</button>
-              </div>
-            </div>
-          </div>
+        <button class="note-btn">Default Button</button>
+        <button class="note-btn focus">Focued Button</button>
+        <button class="note-btn active">Activated Button</button>
+        <button class="note-btn disabled">Disabled Button</button>
       </div>
     </div>
-<</div>
   </div>
 
-    <div style="position:relative;width:100%;height:300px;">
-      <div class="note-modal">
-        <div class="note-modal-content note-modal-content-large">
+  <div>
+    <h2>Toolbar</h2>
+    <div class="virtual-toolbar">
+      <div class="note-toolbar">
+        <div class="note-btn-group">
+          <button class="note-btn">Italick</button>
+          <button class="note-btn active">Bold</button>
+          <button class="note-btn active">Underline</button>
+          <button class="note-btn">Remove Style</button>
+        </div>
+        <div class="note-btn-group">
+          <button class="note-btn">Italick</button>
+          <button class="note-btn active">Bold</button>
+          <button class="note-btn active">Underline</button>
+          <button class="note-btn">Remove Style</button>
+        </div>
+        <div class="note-btn-group">
+          <button class="note-btn">Italick</button>
+          <button class="note-btn active">Bold</button>
+          <button class="note-btn active">Underline</button>
+          <button class="note-btn">Remove Style</button>
+        </div>
+      </div>
+
+    </div>
+  </div>
+
+  <div>
+    <h2> Dropdown</h2>
+    <div class='virtual-toolbar' style="margin-bottom:200px;">
+      <div class="note-btn-group open">
+        <button class="note-btn active">magic</button>
+        <div class="note-dropdown">
+          <div class="note-dropdown-menu">
+            <div class="note-dropdown-menu-item"> Normal</div>
+            <div class="note-dropdown-menu-item"> Normal</div>
+            <div class="note-dropdown-menu-item"> Normal</div>
+            <div class="note-dropdown-menu-item"> Normal</div>
+            <div class="note-dropdown-menu-item"> Normal</div>
+            <div class="note-dropdown-menu-item" style="font-size:32px;"> Header 1</div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div>
+    <h2> Dropdown 2</h2>
+    <div class='virtual-toolbar' style="margin-bottom:200px;">
+      <div class="note-btn-group open">
+        <button class="note-btn">magic</button>
+        <button class="note-btn active">v</button>
+        <div class="note-dropdown">
+          <div class="note-dropdown-menu">
+            <div class="note-dropdown-menu-item"> Normal</div>
+            <div class="note-dropdown-menu-item"> Normal</div>
+            <div class="note-dropdown-menu-item"> Normal</div>
+            <div class="note-dropdown-menu-item"> Normal</div>
+            <div class="note-dropdown-menu-item"> Normal</div>
+            <div class="note-dropdown-menu-item" style="font-size:32px;"> Header 1</div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div >
+    <h2>Modal</h2>
+    <div style="position:relative;width:100%;height:500px;">
+
+      <div class="note-modal-backdrop">
+
+      </div>
+      <div class="note-modal open">
+        <div class="note-modal-content">
           <div class="note-modal-header">
             <button class="close">X</button>
             <h1 class="note-modal-title">Insert Image</h1>
           </div>
           <div class="note-modal-body">
-              <div class="note-form-group">
-                <label class="note-form-label">Text to display</label>
-                <input type="text" class="note-input" style="position: relative;" />
-              </div>
+            <div class="note-form-group">
+              <label class="note-form-label">Text to display</label>
+              <input type="text" class="note-input" style="position: relative;" />
+            </div>
             <div class="note-form-group">
               <label class="note-form-label">Text to display</label>
               <input type="text" class="note-input" style="position: relative;" />
@@ -82,10 +138,11 @@
         </div>
       </div>
 
-      <div class="note-modal-backdrop">
-
-      </div>
     </div>
+
+  </div>
+
+
 
 <div>
   <h2>Tooltip Sample</h2>
