@@ -60,6 +60,16 @@
       $tooltip.remove();
     },
 
+    toggle : function ($node) {
+      var $tooltip = $node.data('summernote-tooltip');
+
+      if ($tooltip.hasClass('in')) {
+        this.hide($node);
+      } else {
+        this.show($node);
+      }
+    },
+
     create : function ($node, options) {
       var self = this;
       options = options || {
