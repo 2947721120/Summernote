@@ -5,6 +5,7 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" />
   <link rel="stylesheet" href="/dist/summernote-lite.css">
   <script type="text/javascript" src="//code.jquery.com/jquery-2.1.4.min.js"></script>
+  <script type="text/javascript" src="/src/js/lite-ui/tooltip.js"></script>
   <script type="text/javascript" src="/src/js/lite-ui/dropdown.js"></script>
   <script type="text/javascript" src="/src/js/lite-ui/modal.js"></script>
   <title>summernote-lite</title>
@@ -19,13 +20,13 @@
   <h4>Summernote standalone</h4>
 
   <div>
-    <h2>Button</h2>
+    <h2>Button (with Tooltip)</h2>
 
     <div class="virtual-toolbar">
-      <button class="note-btn">Default Button</button>
-      <button class="note-btn focus">Focued Button</button>
-      <button class="note-btn active">Activated Button</button>
-      <button class="note-btn disabled">Disabled Button</button>
+      <button class="note-btn" role="tooltip" title="default button">Default Button</button>
+      <button class="note-btn focus" role="tooltip" title="focused button" data-placement="top">Focued Button</button>
+      <button class="note-btn active" role="tooltip" title="activated button" data-placement="left">Activated Button</button>
+      <button class="note-btn disabled" role="tooltip" title="disabled button" data-placement="right">Disabled Button</button>
 
     </div>
   </div>
@@ -214,6 +215,12 @@
   function openDropdown(button) {
     $.summernote.dropdown.toggle($(button));
   }
+
+  $(function() {
+    $("[role=tooltip]").each(function() {
+      $.summernote.tooltip.create($(this));
+    })
+  })
 </script>
 
 </body>
