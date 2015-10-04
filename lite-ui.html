@@ -6,6 +6,7 @@
   <link rel="stylesheet" href="/dist/summernote-lite.css">
   <script type="text/javascript" src="//code.jquery.com/jquery-2.1.4.min.js"></script>
   <script type="text/javascript" src="/src/js/lite-ui/tooltip.js"></script>
+  <script type="text/javascript" src="/src/js/lite-ui/popover.js"></script>
   <script type="text/javascript" src="/src/js/lite-ui/dropdown.js"></script>
   <script type="text/javascript" src="/src/js/lite-ui/modal.js"></script>
   <title>summernote-lite</title>
@@ -32,14 +33,15 @@
   </div>
 
   <div>
-    <h2>Button Group</h2>
+    <h2>Button Group (with Popover)</h2>
 
     <div class="virtual-toolbar">
       <div class="note-btn-group">
-        <button class="note-btn">Default Button</button>
-        <button class="note-btn focus">Focued Button</button>
-        <button class="note-btn active">Activated Button</button>
-        <button class="note-btn disabled">Disabled Button</button>
+        <button class="note-btn" role="popover" data-content="default <img src='https://media.licdn.com/mpr/mpr/shrink_100_100/p/8/005/0a1/379/1a7d09a.jpg' /> button">Default Button</button>
+        <button class="note-btn focus" role="popover" data-content="focused <img src='https://media.licdn.com/mpr/mpr/shrink_100_100/p/8/005/0a1/379/1a7d09a.jpg' /> button" data-placement="top">Focued Button</button>
+        <button class="note-btn active" role="popover" data-content="activated <img src='https://media.licdn.com/mpr/mpr/shrink_100_100/p/8/005/0a1/379/1a7d09a.jpg' /> button" data-placement="left">Activated Button</button>
+        <button class="note-btn disabled" role="popover" data-content="disabled <img src='https://media.licdn.com/mpr/mpr/shrink_100_100/p/8/005/0a1/379/1a7d09a.jpg' /> button" data-placement="right">Disabled Button</button>
+
       </div>
     </div>
   </div>
@@ -218,8 +220,13 @@
 
   $(function() {
     $("[role=tooltip]").each(function() {
-      $.summernote.tooltip.create($(this));
-    })
+      $.summernote.tooltip.init($(this));
+    });
+
+    $("[role=popover]").each(function() {
+      $.summernote.popover.init($(this));
+    });
+
   })
 </script>
 

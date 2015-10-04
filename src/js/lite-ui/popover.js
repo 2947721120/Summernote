@@ -1,69 +1,71 @@
 ;(function($) {
   /**
-   * Tooltip for Summernote Lite UI
+   * Popover for Summernote Lite UI
    *
    */
 
   $.summernote = $.summernote || {};
 
-  $.summernote.tooltip = $.summernote.tooltip || {};
+  $.summernote.popover = $.summernote.popover || {};
 
-  $.summernote.tooltip = {
+  $.summernote.popover = {
 
     show : function ($node) {
-      var $tooltip = $node.data('summernote-tooltip');
-      var options = $node.data('summernote-tooltip-options');
+      var $popover = $node.data('summernote-popover');
+      var options = $node.data('summernote-popover-options');
 
       var offset = $node.offset();
 
       var title = options.title || $node.attr('title') || $node.data('title');
+      var content = options.content || $node.data('content');
       var placement = $node.data('placement') || options.placement;
+      var dist = 6;
 
-      $tooltip.addClass(placement);
-      $tooltip.addClass('in');
-      $tooltip.find(".note-tooltip-content").text(title);
-      $tooltip.appendTo(options.target);
+      $popover.addClass(placement);
+      $popover.addClass('in');
+      $popover.find(".note-popover-content").html(content);
+      $popover.appendTo(options.target);
 
       var nodeWidth = $node.outerWidth();
       var nodeHeight = $node.outerHeight();
-      var tooltipWidth = $tooltip.outerWidth();
-      var tooltipHeight = $tooltip.outerHeight();
+      var popoverWidth = $popover.outerWidth();
+      var popoverHeight = $popover.outerHeight();
 
       if (placement == 'bottom') {
-        $tooltip.css({
-          top : offset.top + nodeHeight,
-          left : offset.left + (nodeWidth/2 - tooltipWidth/2)
+        $popover.css({
+          top : offset.top + nodeHeight + dist,
+          left : offset.left + (nodeWidth/2 - popoverWidth/2)
         });
       } else if (placement == 'top') {
-        $tooltip.css({
-          top : offset.top - tooltipHeight,
-          left : offset.left + (nodeWidth/2 - tooltipWidth/2)
+        $popover.css({
+          top : offset.top - popoverHeight - dist,
+          left : offset.left + (nodeWidth/2 - popoverWidth/2)
         });
       } else if (placement == 'left') {
-        $tooltip.css({
-          top : offset.top + (nodeHeight/2 - tooltipHeight/2),
-          left : offset.left - tooltipWidth
+        $popover.css({
+          top : offset.top + (nodeHeight/2 - popoverHeight/2),
+          left : offset.left - popoverWidth - dist
         });
       } else if (placement == 'right') {
-        $tooltip.css({
-          top : offset.top + (nodeHeight/2 - tooltipHeight/2),
-          left : offset.left + nodeWidth
+        $popover.css({
+          top : offset.top + (nodeHeight/2 - popoverHeight/2),
+          left : offset.left + nodeWidth + dist
         });
       }
 
     },
 
     hide : function ($node) {
-      var $tooltip = $node.data('summernote-tooltip');
+      var $popover = $node.data('summernote-popover');
 
-      $tooltip.removeClass('in');
-      $tooltip.remove();
+      $popover.removeClass('in');
+      $popover.remove();
     },
 
     toggle : function ($node) {
-      var $tooltip = $node.data('summernote-tooltip');
+      var $popover = $node.data('summernote-popover');
 
-      if ($tooltip.hasClass('in')) {
+      if ($popover.hasClass('in')) {
         this.hide($node);
       } else {
         this.show($node);
@@ -74,19 +76,20 @@
       var self = this;
       options = options || {
         title : "",
+        content : "",
         target : 'body',
         trigger : 'hover focus',
         placement : 'bottom'
       }
 
-      // create tooltip node
-      var $tooltip = $('<div class="note-tooltip in">' +
-        '<div class="note-tooltip-arrow"></div>' +
-        '<div class="note-tooltip-content"></div>' +
+      // create popover node
+      var $popover = $('<div class="note-popover in">' +
+        '<div class="note-popover-arrow"></div>' +
+        '<div class="note-popover-content"></div>' +
         '</div>');
 
-      $node.data('summernote-tooltip', $tooltip);
-      $node.data('summernote-tooltip-options', options);
+      $node.data('summernote-popover', $popover);
+      $node.data('summernote-popover-options', options);
 
       // define event
       if (options.trigger !== 'manual') {
