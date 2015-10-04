@@ -33,11 +33,12 @@
 
     toggle : function ($button) {
 
+      var $parent = $button.parent();
+      var isOpened = $parent.hasClass('open');
+
       this.clear();
 
-      var $parent = $button.parent();
-
-      if ($parent.hasClass('open')) {
+      if (isOpened) {
         this.hide($button);
       } else {
         this.show($button);
