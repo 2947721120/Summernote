@@ -3,7 +3,10 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" />
-  <link rel="stylesheet" href="../dist/summernote-lite.css">
+  <link rel="stylesheet" href="/dist/summernote-lite.css">
+  <script type="text/javascript" src="//code.jquery.com/jquery-2.1.4.min.js"></script>
+  <script type="text/javascript" src="/src/js/lite-ui/dropdown.js"></script>
+  <script type="text/javascript" src="/src/js/lite-ui/modal.js"></script>
   <title>summernote-lite</title>
   <style type="text/css">
     .virtual-toolbar {
@@ -70,8 +73,8 @@
   <div>
     <h2> Dropdown</h2>
     <div class='virtual-toolbar' style="margin-bottom:200px;">
-      <div class="note-btn-group open">
-        <button class="note-btn active">magic</button>
+      <div class="note-btn-group">
+        <button class="note-btn" onclick="openDropdown(this)">magic v</button>
         <div class="note-dropdown">
           <div class="note-dropdown-menu">
             <div class="note-dropdown-menu-item"> Normal</div>
@@ -89,9 +92,9 @@
   <div>
     <h2> Dropdown 2</h2>
     <div class='virtual-toolbar' style="margin-bottom:200px;">
-      <div class="note-btn-group open">
+      <div class="note-btn-group">
         <button class="note-btn">magic</button>
-        <button class="note-btn active">v</button>
+        <button class="note-btn" onclick="openDropdown(this)">v</button>
         <div class="note-dropdown">
           <div class="note-dropdown-menu">
             <div class="note-dropdown-menu-item"> Normal</div>
@@ -108,12 +111,16 @@
 
   <div >
     <h2>Modal</h2>
+
+    <div>
+      <button class="note-btn active" onclick="openTestModal()">Open Test Modal</button>
+    </div>
     <div style="position:relative;width:100%;height:500px;">
 
       <div class="note-modal-backdrop">
 
       </div>
-      <div class="note-modal open">
+      <div class="note-modal" id="test-modal">
         <div class="note-modal-content">
           <div class="note-modal-header">
             <button class="close">X</button>
@@ -198,6 +205,16 @@
     </div>
   </div>
 </div>
+
+<script type="text/javascript">
+  function openTestModal() {
+    $.summernote.modal.show($("#test-modal"));
+  }
+
+  function openDropdown(button) {
+    $.summernote.dropdown.toggle($(button));
+  }
+</script>
 
 </body>
 </html>
