@@ -1,6 +1,7 @@
 define([
-  'summernote/base/renderer'
-], function (renderer) {
+  'summernote/base/renderer',
+  'summernote/lite/ui/tooltip'
+], function (renderer, tooltip) {
   var editor = renderer.create('<div class="note-editor note-frame"/>');
   var toolbar = renderer.create('<div class="note-toolbar"/>');
   var editingArea = renderer.create('<div class="note-editing-area"/>');
@@ -20,7 +21,13 @@ define([
   var airEditable = renderer.create('<div class="note-editable" contentEditable="true"/>');
 
   var buttonGroup = renderer.create('<div class="note-btn-group">');
-  var button = renderer.create('<button class="note-btn">');
+  var button = renderer.create('<button class="note-btn">', function ($node, options) {
+    if (options && options.tooltip) {
+      tooltip.create($node, {
+        title: options.tooltip
+      });
+    }
+  });
 
   var ui = {
     editor: editor,
@@ -33,36 +40,37 @@ define([
     airEditable: airEditable,
     buttonGroup: buttonGroup,
     button: button,
-    //dropdown: dropdown,
-    //dropdownCheck: dropdownCheck,
-    //palette: palette,
-    //dialog: dialog,
-    //popover: popover,
 
-    toggleBtn: function ($btn, isEnable) {
-      //$btn.toggleClass('disabled', !isEnable);
-      //$btn.attr('disabled', !isEnable);
-    },
+    // dropdown: dropdown,
+    // dropdownCheck: dropdownCheck,
+    // palette: palette,
+    // dialog: dialog,
+    // popover: popover,
 
-    toggleBtnActive: function ($btn, isActive) {
-      //$btn.toggleClass('active', isActive);
-    },
+    // toggleBtn: function ($btn, isEnable) {
+    //   $btn.toggleClass('disabled', !isEnable);
+    //   $btn.attr('disabled', !isEnable);
+    // },
 
-    onDialogShown: function ($dialog, handler) {
-      //$dialog.one('shown.bs.modal', handler);
-    },
+    // toggleBtnActive: function ($btn, isActive) {
+    //   $btn.toggleClass('active', isActive);
+    // },
 
-    onDialogHidden: function ($dialog, handler) {
-      //$dialog.one('hidden.bs.modal', handler);
-    },
+    // onDialogShown: function ($dialog, handler) {
+    //   $dialog.one('shown.bs.modal', handler);
+    // },
 
-    showDialog: function ($dialog) {
-      //$dialog.modal('show');
-    },
+    // onDialogHidden: function ($dialog, handler) {
+    //   $dialog.one('hidden.bs.modal', handler);
+    // },
 
-    hideDialog: function ($dialog) {
-      //$dialog.modal('hide');
-    },
+    // showDialog: function ($dialog) {
+    //   $dialog.modal('show');
+    // },
+
+    // hideDialog: function ($dialog) {
+    //   $dialog.modal('hide');
+    // },
 
     createLayout: function ($note, options) {
       var $editor = (options.airMode ? ui.airEditor([

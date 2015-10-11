@@ -1,23 +1,15 @@
-;(function($) {
-  /**
-   * Modal for Summernote Lite UI
-   *
-   */
+define(function () {
+  var Modal = function () {
+    var self = this;
 
-  $.summernote = $.summernote || {};
-
-  $.summernote.modal = $.summernote.modal || {};
-
-  $.summernote.modal = {
-    show : function($modal, options) {
+    this.show = function ($modal, options) {
       options = options || { target : 'body' };
-
 
       if (!$modal.data('backdrop')) {
         $modal.data('backdrop', $('<div class="note-modal-backdrop" />'));
       }
 
-      if (options.target == 'body') {
+      if (options.target === 'body') {
         $modal.data('backdrop').css('position', 'fixed');
         $modal.css('position', 'fixed');
       } else {
@@ -30,19 +22,17 @@
 
       $modal.trigger('note.modal.show');
 
-      var self = this;
-      $modal.off('click').on('click', '.close', function() {
+      $modal.off('click').on('click', '.close', function () {
         self.hide($modal);
-      })
+      });
+    };
 
-    },
-    hide : function ($modal) {
-
+    this.hide = function ($modal) {
       $modal.removeClass('open').hide();
       $modal.data('backdrop').hide();
-
       $modal.trigger('note.modal.hide');
+    };
+  };
 
-    }
-  }
-})(jQuery);
+  return Modal;
+});

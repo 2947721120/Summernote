@@ -6,10 +6,12 @@ define(function () {
     this.initialize = function () {
       ui.buttonGroup([
         ui.button({
+          tooltip: 'bold',
           contents: 'bold',
           click: context.createInvokeHandler('editor.bold')
         }),
         ui.button({
+          tooltip: 'italic',
           contents: 'italic',
           click: context.createInvokeHandler('editor.italic'),
           callback : function ($button) {
