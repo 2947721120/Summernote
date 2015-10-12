@@ -5,13 +5,13 @@ define(function () {
     var Dropdown = function ($node, options) {
       var self = this;
 
-      this.init = function (options) {
+      this.init = function () {
         this.$button = $node;
         this.setEvent();
       };
 
       this.setEvent = function () {
-        this.$button.on('click', function() {
+        this.$button.on('click', function () {
           self.toggle();
         });
       };
@@ -51,16 +51,16 @@ define(function () {
       create : function ($node, options) {
         return new Dropdown($node, options);
       }
-    }
+    };
   })();
 
-  $(document).on('click', function(e) {
+  $(document).on('click', function (e) {
     if (!$(e.target).closest('.note-btn-group').length) {
       $('.note-btn-group.open').removeClass('open');
     }
   });
 
-  $(document).on('click.note-dropdown-menu', function(e) {
+  $(document).on('click.note-dropdown-menu', function (e) {
     $(e.target).closest('.note-dropdown-menu').parent().removeClass('open');
   });
 

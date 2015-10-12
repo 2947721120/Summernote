@@ -50,10 +50,10 @@ define([
             items: context.options.styleTags,
             click: context.createInvokeHandler('editor.formatBlock'),
             callback : function ($node) {
-              $node.find(".note-dropdown-item").each(function() {
+              $node.find('.note-dropdown-item').each(function () {
                 var $item = $(this);
 
-                var $a = $item.find("a");
+                var $a = $item.find('a');
                 var text  = $a.html();
 
                 var tag = '<' + $a.data('value') + '/>';
@@ -120,11 +120,10 @@ define([
             }),
             click: context.createInvokeHandler('editor.fontName'),
             callback : function ($node) {
-              $node.width(200);
-              $node.find(".note-dropdown-item").each(function() {
+              $node.find('.note-dropdown-item').each(function () {
                 var $item = $(this);
 
-                var $a = $item.find("a");
+                var $a = $item.find('a');
 
                 $a.css({
                   'font-family' : $a.data('value')

@@ -1,6 +1,6 @@
 define(function () {
 
-  var popover = (function() {
+  var popover = (function () {
 
 
     var Popover = function ($node, options) {
@@ -97,7 +97,7 @@ define(function () {
         this.$popover.remove();
       };
 
-      this.toggle = function ($node) {
+      this.toggle = function () {
         if (this.$popover.hasClass('in')) {
           this.hide();
         } else {
