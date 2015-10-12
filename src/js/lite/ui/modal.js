@@ -1,38 +1,53 @@
 define(function () {
-  var Modal = function () {
-    var self = this;
 
-    this.show = function ($modal, options) {
-      options = options || { target : 'body' };
+  var modal = (function () {
+    var Modal = function ($node, options) {
+      var self = this;
 
-      if (!$modal.data('backdrop')) {
-        $modal.data('backdrop', $('<div class="note-modal-backdrop" />'));
-      }
+      this.init = function (options) {
+        this.options = $.extend({}, {
+          target: 'body'
+        }, options);
 
-      if (options.target === 'body') {
-        $modal.data('backdrop').css('position', 'fixed');
-        $modal.css('position', 'fixed');
-      } else {
-        $modal.data('backdrop').css('position', 'absolute');
-        $modal.css('position', 'absolute');
-      }
+        this.$modal = $node;
+        this.$backdrop = $('<div class="note-modal-backdrop" />');
 
-      $modal.data('backdrop').appendTo(options.target).show();
-      $modal.appendTo(options.target).addClass('open').show();
+      };
 
-      $modal.trigger('note.modal.show');
+      this.show = function () {
+        if (this.options.target === 'body') {
+          this.$backdrop.css('position', 'fixed');
+          this.$modal.css('position', 'fixed');
+        } else {
+          this.$backdrop.css('position', 'absolute');
+          this.$modal.css('position', 'absolute');
+        }
 
-      $modal.off('click').on('click', '.close', function () {
-        self.hide($modal);
-      });
+        this.$backdrop.appendTo(options.target).show();
+        this.$modal.appendTo(options.target).addClass('open').show();
+
+        this.$modal.trigger('note.modal.show');
+        this.$modal.off('click.close').on('click.close', function () {
+          self.hide();
+        });
+      };
+
+      this.hide = function () {
+        this.$modal.removeClass('open').hide();
+        this.$backdrop.hide();
+        this.$modal.trigger('note.modal.hide');
+      };
+
+      this.init(options);
     };
 
-    this.hide = function ($modal) {
-      $modal.removeClass('open').hide();
-      $modal.data('backdrop').hide();
-      $modal.trigger('note.modal.hide');
+    return {
+      create: function ($node, options) {
+        return new Modal($node, options);
+      }
     };
-  };
+  })();
 
-  return Modal;
+  return modal;
+
 });
