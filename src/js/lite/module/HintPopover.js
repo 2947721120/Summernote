@@ -32,7 +32,7 @@ define([
         className: 'note-hint-popover'
       }).render().appendTo('body');
 
-      this.$content = this.$popover.find('.popover-content');
+      this.$content = this.$popover.find('.note-popover-content');
 
       dom.attachEvents($note, this.events);
 

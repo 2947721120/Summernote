@@ -1,6 +1,7 @@
 define([
-  'summernote/base/core/key'
-], function (key) {
+  'summernote/base/core/key',
+  'summernote/lite/ui/modal'
+], function (key, modal) {
   var LinkDialog = function (context) {
     var self = this;
     var ui = $.summernote.ui;
@@ -12,20 +13,20 @@ define([
     this.initialize = function () {
       var $container = options.dialogsInBody ? $(document.body) : $editor;
 
-      var body = '<div class="form-group">' +
-                   '<label>' + lang.link.textToDisplay + '</label>' +
-                   '<input class="note-link-text form-control" type="text" />' +
+      var body = '<div class="note-form-group">' +
+                   '<label class="note-form-label">' + lang.link.textToDisplay + '</label>' +
+                   '<input class="note-link-text note-input" type="text" />' +
                  '</div>' +
-                 '<div class="form-group">' +
-                   '<label>' + lang.link.url + '</label>' +
-                   '<input class="note-link-url form-control" type="text" value="http://" />' +
+                 '<div class="note-form-group">' +
+                   '<label class="note-form-label">' + lang.link.url + '</label>' +
+                   '<input class="note-link-url note-input" type="text" value="http://" />' +
                  '</div>' +
                  (!options.disableLinkTarget ?
-                   '<div class="checkbox">' +
+                   '<div class="note-form-group">' +
                      '<label>' + '<input type="checkbox" checked> ' + lang.link.openInNewWindow + '</label>' +
                    '</div>' : ''
                  );
-      var footer = '<button href="#" class="btn btn-primary note-link-btn disabled" disabled>' + lang.link.insert + '</button>';
+      var footer = '<button href="#" class="note-btn note-btn-primary note-btn-large note-link-btn">' + lang.link.insert + '</button>';
 
       this.$dialog = ui.dialog({
         className: 'link-dialog',
@@ -33,6 +34,8 @@ define([
         body: body,
         footer: footer
       }).render().appendTo($container);
+
+      this.$dialog.data('modal', modal.create(this.$dialog));
     };
 
     this.destroy = function () {
@@ -62,6 +65,7 @@ define([
         $openInNewWindow = self.$dialog.find('input[type=checkbox]');
 
         ui.onDialogShown(self.$dialog, function () {
+
           $linkText.val(linkInfo.text);
 
           $linkText.on('input', function () {
@@ -93,14 +97,13 @@ define([
 
           $linkBtn.one('click', function (event) {
             event.preventDefault();
-
             deferred.resolve({
               range: linkInfo.range,
               url: $linkUrl.val(),
               text: $linkText.val(),
               isNewWindow: $openInNewWindow.is(':checked')
             });
-            self.$dialog.modal('hide');
+            ui.hideDialog(self.$dialog);
           });
         });
 

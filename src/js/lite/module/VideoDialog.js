@@ -1,8 +1,9 @@
 define([
   'summernote/base/core/key',
   'summernote/base/core/range',
-  'summernote/base/core/dom'
-], function (key, range, dom) {
+  'summernote/base/core/dom',
+  'summernote/lite/ui/modal'
+], function (key, range, dom, modal) {
   var VideoDialog = function (context) {
     var self = this;
     var ui = $.summernote.ui;
@@ -26,17 +27,19 @@ define([
     this.initialize = function () {
       var $container = options.dialogsInBody ? $(document.body) : $editor;
 
-      var body = '<div class="form-group row-fluid">' +
-          '<label>' + lang.video.url + ' <small class="text-muted">' + lang.video.providers + '</small></label>' +
-          '<input class="note-video-url form-control span12" type="text" />' +
+      var body = '<div class="note-form-group">' +
+          '<label class="note-form-label">' + lang.video.url + ' <small class="text-muted">' + lang.video.providers + '</small></label>' +
+          '<input class="note-video-url note-input" type="text" />' +
           '</div>';
-      var footer = '<button href="#" class="btn btn-primary note-video-btn disabled" disabled>' + lang.video.insert + '</button>';
+      var footer = '<button href="#" class="note-btn note-btn-primary note-video-btn">' + lang.video.insert + '</button>';
 
       this.$dialog = ui.dialog({
         title: lang.video.insert,
         body: body,
         footer: footer
       }).render().appendTo($container);
+
+      this.$dialog.data('modal', modal.create(this.$dialog));
     };
 
     this.destroy = function () {

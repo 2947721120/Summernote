@@ -489,7 +489,10 @@ define([
         return ui.button({
           contents: '<i class="fa fa-link"/>',
           tooltip: lang.link.edit,
-          click: context.createInvokeHandler('linkDialog.show')
+          click: function () {
+            context.invoke('linkDialog.show');
+            context.invoke('linkPopover.hide');
+          }
         }).render();
       });
 

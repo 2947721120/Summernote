@@ -23,11 +23,11 @@ define(function () {
           this.$modal.css('position', 'absolute');
         }
 
-        this.$backdrop.appendTo(options.target).show();
-        this.$modal.appendTo(options.target).addClass('open').show();
+        this.$backdrop.appendTo(this.options.target).show();
+        this.$modal.appendTo(this.options.target).addClass('open').show();
 
         this.$modal.trigger('note.modal.show');
-        this.$modal.off('click.close').on('click.close', function () {
+        this.$modal.off('click', '.close').on('click', '.close', function () {
           self.hide();
         });
       };

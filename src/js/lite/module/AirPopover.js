@@ -39,7 +39,7 @@ define([
 
       this.instance = popover.create(this.$popover);
 
-      context.buildButtons(this.$popover.find('.popover-content'), options.popover.air);
+      context.buildButtons(this.$popover.find('.note-popover-content'), options.popover.air);
       dom.attachEvents($note, this.events);
     };
 

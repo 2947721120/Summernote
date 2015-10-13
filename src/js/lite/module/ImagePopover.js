@@ -24,7 +24,7 @@ define([
         className: 'note-image-popover'
       }).render().appendTo('body');
 
-      context.buildButtons(this.$popover.find('.popover-content'), options.popover.image);
+      context.buildButtons(this.$popover.find('.note-popover-content'), options.popover.image);
       dom.attachEvents($note, this.events);
     };
 
@@ -36,6 +36,7 @@ define([
     this.update = function (target) {
       if (dom.isImg(target)) {
         var pos = dom.posFromPlaceholder(target);
+        console.log(pos);
         this.$popover.css({
           display: 'block',
           left: pos.left,

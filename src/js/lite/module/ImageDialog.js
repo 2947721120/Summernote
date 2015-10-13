@@ -1,7 +1,8 @@
 define([
   'summernote/base/core/key',
-  'summernote/base/core/async'
-], function (key, async) {
+  'summernote/base/core/async',
+  'summernote/lite/ui/modal'
+], function (key, async, modal) {
   var ImageDialog = function (context) {
     var self = this;
     var ui = $.summernote.ui;
@@ -21,22 +22,24 @@ define([
         imageLimitation = '<small>' + lang.image.maximumFileSize + ' : ' + readableSize + '</small>';
       }
 
-      var body = '<div class="form-group note-group-select-from-files">' +
-                   '<label>' + lang.image.selectFromFiles + '</label>' +
-                   '<input class="note-image-input form-control" type="file" name="files" accept="image/*" multiple="multiple" />' +
+      var body = '<div class="note-form-group note-group-select-from-files">' +
+                   '<label class="note-form-label">' + lang.image.selectFromFiles + '</label>' +
+                   '<input class="note-image-input note-input" type="file" name="files" accept="image/*" multiple="multiple" />' +
                    imageLimitation +
                  '</div>' +
-                 '<div class="form-group" style="overflow:auto;">' +
-                   '<label>' + lang.image.url + '</label>' +
-                   '<input class="note-image-url form-control col-md-12" type="text" />' +
+                 '<div class="note-form-group">' +
+                   '<label class="note-form-label">' + lang.image.url + '</label>' +
+                   '<input class="note-image-url note-input" type="text" />' +
                  '</div>';
-      var footer = '<button href="#" class="btn btn-primary note-image-btn disabled" disabled>' + lang.image.insert + '</button>';
+      var footer = '<button href="#" class="note-btn note-btn-primary note-btn-large note-image-btn">' + lang.image.insert + '</button>';
 
       this.$dialog = ui.dialog({
         title: lang.image.insert,
         body: body,
         footer: footer
       }).render().appendTo($container);
+
+      this.$dialog.data('modal', modal.create(this.$dialog));
     };
 
     this.destroy = function () {

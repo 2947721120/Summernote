@@ -1,8 +1,10 @@
 define([
   'summernote/base/core/key',
   'summernote/base/core/range',
-  'summernote/base/core/dom'
-], function (key, range, dom) {
+  'summernote/base/core/dom',
+  'summernote/lite/ui/tooltip',
+  'summernote/lite/ui/modal'
+], function (key, range, dom, tooltip, modal) {
   var SpecialCharDialog = function (context) {
     var self = this;
     var ui = $.summernote.ui;
@@ -18,7 +20,7 @@ define([
       RIGHT: 39,
       ENTER: 13
     };
-    var COLUMN_LENGTH = 15;
+    var COLUMN_LENGTH = 13;
     var COLUMN_WIDTH = 35;
 
     var currentColumn, currentRow, totalColumn, totalRow = 0;
@@ -214,12 +216,18 @@ define([
     this.initialize = function () {
       var $container = options.dialogsInBody ? $(document.body) : $editor;
 
-      var body = '<div class="form-group row-fluid">' + this.makeSpecialCharSetTable()[0].outerHTML + '</div>';
+      var body = '<div class="note-form-group">' + this.makeSpecialCharSetTable()[0].outerHTML + '</div>';
 
       this.$dialog = ui.dialog({
         title: lang.specialChar.select,
         body: body
       }).render().appendTo($container);
+
+      this.$dialog.data('modal', modal.create(this.$dialog));
+
+      this.$dialog.find('.note-specialchar-node .note-btn').each(function () {
+        $(this).data('tooltip', tooltip.create($(this)));
+      });
     };
 
     this.show = function () {
@@ -237,6 +245,12 @@ define([
         }
       }).fail(function () {
         context.invoke('editor.restoreRange');
+      });
+    };
+
+    this.destroy = function () {
+      this.$dialog.find('.note-specialchar-node .note-btn').each(function () {
+        $(this).data('tooltip').hide();
       });
     };
 
@@ -385,8 +399,6 @@ define([
 
           $(document).on('keydown', keyDownEventHandler);
 
-          self.$dialog.find('button').tooltip();
-
           $specialCharNode.on('click', function (event) {
             event.preventDefault();
             deferred.resolve(decodeURIComponent($(event.currentTarget).find('button').data('value')));
@@ -398,8 +410,6 @@ define([
 
         ui.onDialogHidden(self.$dialog, function () {
           $specialCharNode.off('click');
-
-          self.$dialog.find('button').tooltip('destroy');
 
           $(document).off('keydown', keyDownEventHandler);
 

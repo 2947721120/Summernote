@@ -20,13 +20,13 @@ define([
       this.$popover = ui.popover({
         className: 'note-link-popover',
         callback: function ($node) {
-          var $content = $node.find('.popover-content');
+          var $content = $node.find('.note-popover-content');
           $content.prepend('<span><a target="_blank"></a>&nbsp;</span>');
         }
       }).render().appendTo('body');
 
 
-      context.buildButtons(this.$popover.find('.popover-content'), options.popover.link);
+      context.buildButtons(this.$popover.find('.note-popover-content'), options.popover.link);
 
       dom.attachEvents($note, this.events);
     };

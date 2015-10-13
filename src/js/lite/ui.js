@@ -80,9 +80,8 @@ define([
       tooltip.create($(this));
     });
   });
-  var dialog = renderer.create('<div class="modal" aria-hidden="false"/>', function ($node, options) {
+  var dialog = renderer.create('<div class="note-modal" />', function ($node, options) {
     $node.html([
-      '<div class="note-modal">',
       ' <div class="note-modal-content">',
       (options.title ?
         '<div class="note-modal-header">' +
@@ -94,8 +93,7 @@ define([
       (options.footer ?
         '<div class="note-modal-footer">' + options.footer + '</div>' : ''
       ),
-      ' </div>',
-      '</div>'
+      ' </div>'
     ].join(''));
   });
 
@@ -133,11 +131,11 @@ define([
     },
 
     onDialogShown: function ($dialog, handler) {
-      $dialog.one('node.show.modal', handler);
+      $dialog.one('note.modal.show', handler);
     },
 
     onDialogHidden: function ($dialog, handler) {
-      $dialog.one('node.hide.modal', handler);
+      $dialog.one('note.modal.hide', handler);
     },
 
     showDialog: function ($dialog) {
