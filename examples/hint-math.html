@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" /> 
+  <title>Math Hint - summernote</title>
+  <script type="text/x-mathjax-config">
+    MathJax.Hub.Config({
+      tex2jax: {
+        inlineMath: [['$','$'], ['\\(','\\)']]
+      },
+      preview: [["img",{src: "/images/mypic.jpg"}]]
+    });
+  </script>
+  <script type="text/javascript" async src="https://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-MML-AM_CHTML"></script>
+
+  <!-- include jquery -->
+  <script src="//cdnjs.cloudflare.com/ajax/libs/jquery/2.1.4/jquery.js"></script> 
+
+  <!-- include libraries BS3 -->
+  <link rel="stylesheet" href="//netdna.bootstrapcdn.com/bootstrap/3.0.3/css/bootstrap.min.css" />
+  <script type="text/javascript" src="//netdna.bootstrapcdn.com/bootstrap/3.0.3/js/bootstrap.min.js"></script>
+  <link rel="stylesheet" href="//netdna.bootstrapcdn.com/font-awesome/4.2.0/css/font-awesome.min.css" />
+
+  <!-- include summernote -->
+  <link rel="stylesheet" href="../dist/summernote.css">
+
+  <script type="text/javascript" src="../dist/summernote.js"></script>
+  <script type="text/javascript" src="../lang/summernote-ko-KR.js"></script>
+
+
+
+  <script type="text/javascript">
+    $(document).ready(function () {
+
+      $('.summernote').summernote({
+        height: 300,
+        hint: [{
+          search: function (keyword, callback) {
+            console.log(keyword);
+            callback([keyword]);
+          },
+          fullMatch : true,
+          match: /\$\$\(([^\)]+)\)/g,
+          template : function (item) {
+            var dom = $("<div>$" + item + "$</div>")[0];
+            MathJax.Hub.Queue(['Typeset', MathJax.Hub, dom]);
+            return dom;
+          }, content : function (item, el) {
+            return item;
+          }
+
+        }]
+      });
+
+
+
+    });
+  </script>
+</head>
+<body>
+<textarea class="summernote">Type text start with ":". For example, :smile or :+1:.</textarea>
+</body>
+</html>

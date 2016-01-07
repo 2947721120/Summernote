@@ -104,7 +104,7 @@ define([
     this.nodeFromItem = function ($item) {
       var hint = hints[$item.data('index')];
       var item = $item.data('item');
-      var node = hint.content ? hint.content(item) : item;
+      var node = hint.content ? hint.content(item, $item) : item;
       if (typeof node === 'string') {
         node = dom.createText(node);
       }
@@ -147,7 +147,10 @@ define([
 
     this.searchKeyword = function (index, keyword, callback) {
       var hint = hints[index];
-      if (hint && hint.match.test(keyword) && hint.search) {
+
+      if (hint && hint.fullMatch) {
+        hint.search(keyword, callback);
+      } else if (hint && hint.match.test(keyword) && hint.search) {
         var matches = hint.match.exec(keyword);
         hint.search(matches[1], callback);
       } else {
@@ -176,9 +179,11 @@ define([
           }
         }
       } else {
-        var wordRange = context.invoke('editor.createRange').getWordRange();
+        var rng = context.invoke('editor.createRange');
+
+        var wordRange = rng.getWordRange();
         var keyword = wordRange.toString();
-        if (hints.length && keyword) {
+        if (hints.length) {
           this.$content.empty();
 
           var bnd = func.rect2bnd(list.last(wordRange.getClientRects()));
@@ -191,9 +196,52 @@ define([
             this.lastWordRange = wordRange;
 
             hints.forEach(function (hint, idx) {
-              if (hint.match.test(keyword)) {
+
+              if (hint.fullMatch) {
+                var fullString = wordRange.sc.textContent;
+                var result = fullString.match(hint.match);
+
+                if (!result) {
+                  return;
+                }
+
+                var start = 0;
+                var last = 0;
+                var currentString;
+                for (var i = 0, len = result.length; i < len; i++) {
+                  var str = result[i];
+                  var pos = fullString.indexOf(str, start);
+                  last = pos + str.length;
+
+                  if (pos <= wordRange.so && wordRange.so <= last) {
+                    start = pos;
+                    currentString = str;
+                    break;
+                  }
+                  start = last;
+                }
+
+                var WrappedRange =  wordRange.constructor;
+                var wr = new WrappedRange(wordRange.sc, start, wordRange.ec, last);
+
+                self.lastWordRange = wr;
+
+                var rect = wr.getClientRects();
+                var bnd = func.rect2bnd(list.last(rect));
+                self.$popover.css({
+                  left: bnd.left,
+                  top: bnd.top + bnd.height
+                });
+
+                result = hint.match.exec(currentString);
+                keyword = result[1];
                 self.createGroup(idx, keyword).appendTo(self.$content);
+              } else {
+                if (hint.match.test(keyword)) {
+                  self.createGroup(idx, keyword).appendTo(self.$content);
+                }
               }
+
             });
           }
         } else {
