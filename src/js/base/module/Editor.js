@@ -124,7 +124,7 @@ define([
      */
     this.createRange = function () {
       this.focus();
-      return range.create();
+      return range.create.apply(range, arguments);
     };
 
     /**
