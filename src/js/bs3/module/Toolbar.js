@@ -2,6 +2,7 @@ define(function () {
   var Toolbar = function (context) {
     var ui = $.summernote.ui;
 
+    var $editingArea = context.layoutInfo.editingArea;
     var $note = context.layoutInfo.note;
     var $toolbar = context.layoutInfo.toolbar;
     var options = context.options;
@@ -21,6 +22,11 @@ define(function () {
 
       if (options.toolbarContainer) {
         $toolbar.appendTo(options.toolbarContainer);
+      } else if (options.toolbarDirection === 'bottom') {
+        $editingArea.after($toolbar);
+        $toolbar.find('.btn-group').addClass('dropup');
+      } else {
+        $toolbar.find('.btn-group').removeClass('dropup');
       }
 
       $note.on('summernote.keyup summernote.mouseup summernote.change', function () {
