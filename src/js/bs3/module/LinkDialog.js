@@ -62,37 +62,42 @@ define([
         $linkBtn = self.$dialog.find('.note-link-btn'),
         $openInNewWindow = self.$dialog.find('input[type=checkbox]');
 
+        var toggleBtn = function () {
+          ui.toggleBtn($linkBtn, $linkText.val() && $linkUrl.val());
+        };
+
         ui.onDialogShown(self.$dialog, function () {
           context.triggerEvent('dialog.shown');
 
           $linkText.val(linkInfo.text);
 
           $linkText.on('input', function () {
-            ui.toggleBtn($linkBtn, $linkText.val() && $linkUrl.val());
             // if linktext was modified by keyup,
             // stop cloning text from linkUrl
             linkInfo.text = $linkText.val();
+            toggleBtn();
           });
 
           // if no url was given, copy text to url
           if (!linkInfo.url) {
             linkInfo.url = linkInfo.text || 'http://';
-            ui.toggleBtn($linkBtn, linkInfo.text);
+            toggleBtn();
           }
 
           $linkUrl.on('input', function () {
-            ui.toggleBtn($linkBtn, $linkText.val() && $linkUrl.val());
             // display same link on `Text to display` input
             // when create a new link
             if (!linkInfo.text) {
               $linkText.val($linkUrl.val());
             }
+            toggleBtn();
           }).val(linkInfo.url).trigger('focus');
 
           self.bindEnterKey($linkUrl, $linkBtn);
           self.bindEnterKey($linkText, $linkBtn);
 
           $openInNewWindow.prop('checked', linkInfo.isNewWindow);
+          $openInNewWindow.on('change', toggleBtn);
 
           $linkBtn.one('click', function (event) {
             event.preventDefault();
@@ -108,10 +113,10 @@ define([
         });
 
         ui.onDialogHidden(self.$dialog, function () {
-          // detach events
           $linkText.off('input keypress');
           $linkUrl.off('input keypress');
           $linkBtn.off('click');
+          $openInNewWindow.off('change');
 
           if (deferred.state() === 'pending') {
             deferred.reject();
