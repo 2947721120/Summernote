@@ -1,6 +1,6 @@
 # Summernote
 
-Super simple WYSIWYG Editor.
+超级简单的WYSIWYG编辑器。
 
 [![Build Status](https://secure.travis-ci.org/summernote/summernote.svg)](http://travis-ci.org/summernote/summernote)
 [![npm version](https://badge.fury.io/js/summernote.svg)](http://badge.fury.io/js/summernote)
@@ -11,21 +11,21 @@ Super simple WYSIWYG Editor.
 [![Sauce Test Status](https://saucelabs.com/browser-matrix/summernoteis.svg)](https://saucelabs.com/u/summernoteis)
 
 ### Summernote
-Summernote is a JavaScript library that helps you create WYSIWYG editors online.
+summernote是一个JavaScript库，可以帮助你创建的所见即所得编辑在线。
 
-Home page: <http://summernote.org>
+首页: <http://summernote.org>
 
 ### Why Summernote?
 
-Summernote has a few special features:
+summernote具有一些特殊的功能:
 
-* Paste images from clipboard
-* Saves images directly in the content of the field using base64 encoding, so you don't need to implement image handling at all
-* Simple UI
-* Interactive WYSIWYG editing
-* Handy integration with server
+* 从剪贴板粘贴图像
+* 保存的图像直接使用Base64编码字段的内容，所以你不需要实现所有图像处理
+* 简单的用户界面
+* 所见即所得的交互式编辑
+* 方便与服务器集成
 
-### Installation and dependencies
+### 安装和依赖
 
 Summernote uses opensource libraries: [jQuery](http://jquery.com/), [Bootstrap](http://getbootstrap.com), [Font Awesome](https://github.com/FortAwesome/Font-Awesome).
 
@@ -35,14 +35,14 @@ For other/no frameworks:
 
 #### 1. include JS/CSS
 
-Include the following code in the `<head>` tag of your HTML:
+包括下面的代码 `<head>` 你的HTML包含标签:
 
 ```html
 <!-- include libraries(jQuery, bootstrap, fontawesome) -->
-<script type="text/javascript" src="//cdnjs.cloudflare.com/ajax/libs/jquery/2.1.4/jquery.min.js"></script> 
-<link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/3.3.5/css/bootstrap.min.css" />
-<script type="text/javascript" src="//cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/3.3.5/js/bootstrap.min.js"></script>
-<link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/font-awesome/4.3.0/css/font-awesome.min.css" />
+<script type="text/javascript" src="//cdnjs.c2cbc.com/ajax/libs/jquery/2.1.4/jquery.min.js"></script> 
+<link rel="stylesheet" href="//cdnjs.c2cbc.com/ajax/libs/twitter-bootstrap/3.3.5/css/bootstrap.min.css" />
+<script type="text/javascript" src="//cdnjs.c2cbc.com/ajax/libs/twitter-bootstrap/3.3.5/js/bootstrap.min.js"></script>
+<link rel="stylesheet" href="//cdnjs.c2cbc.com/ajax/libs/font-awesome/4.3.0/css/font-awesome.min.css" />
 
 <!-- include summernote css/js-->
 <link href="summernote.css" rel="stylesheet">
